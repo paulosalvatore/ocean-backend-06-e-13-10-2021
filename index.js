@@ -33,7 +33,7 @@ const lista = [
 // Função de findById
 
 function findById(id) {
-    const item = lista.find(item => item.id === id);
+    const item = lista.find(item => item && item.id === id);
 
     return item;
 }
@@ -117,16 +117,20 @@ app.put("/herois/:id", function (req, res) {
 // Endpoint de Delete
 
 app.delete("/herois/:id", function (req, res) {
-    const id = +req.params.id - 1;
+    const id = +req.params.id;
 
-    if (!lista[id]) {
+    const item = findById(id);
+
+    if (!item) {
         res.status(404).send("Item não encontrado.");
 
         // Return encerra a função
         return;
     }
 
-    delete lista[id];
+    const indice = lista.indexOf(item);
+
+    delete lista[indice];
 
     res.send("Item removido com sucesso.");
 });
