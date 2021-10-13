@@ -17,12 +17,15 @@ app.get("/oi", function (req, res) {
 
 const lista = [
     {
+        id: 1,
         nome: "Mulher Maravilha",
     },
     {
+        id: 2,
         nome: "Capitã Marvel",
     },
     {
+        id: 10,
         nome: "Homem de Ferro",
     },
 ];
@@ -36,9 +39,9 @@ app.get("/herois", function (req, res) {
 // Endpoint de Read Single (by Id)
 
 app.get("/herois/:id", function (req, res) {
-    const id = +req.params.id - 1;
+    const id = +req.params.id;
 
-    const item = lista[id];
+    const item = lista.find(item => item.id === id);
 
     if (!item) {
         res.status(404).send("Item não encontrado.");
