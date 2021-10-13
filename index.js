@@ -15,7 +15,17 @@ app.get("/oi", function (req, res) {
 
 // Lista de heróis
 
-const lista = ["Mulher Maravilha", "Capitã Marvel", "Homem de Ferro"];
+const lista = [
+    {
+        nome: "Mulher Maravilha",
+    },
+    {
+        nome: "Capitã Marvel",
+    },
+    {
+        nome: "Homem de Ferro",
+    },
+];
 
 // Endpoint de Read All
 
