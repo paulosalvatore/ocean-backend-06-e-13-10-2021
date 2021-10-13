@@ -63,7 +63,22 @@ app.post("/herois", function (req, res) {
 app.put("/herois/:id", function (req, res) {
     const id = +req.params.id - 1;
 
+    if (!lista[id]) {
+        res.status(404).send("Item não encontrado.");
+
+        // Return encerra a função
+        return;
+    }
+
     const item = req.body;
+
+    if (!item || !item.nome) {
+        res.status(400).send(
+            "Corpo da requisição não encontrado ou está faltando a chave 'nome'."
+        );
+
+        return;
+    }
 
     lista[id] = item.nome;
 
