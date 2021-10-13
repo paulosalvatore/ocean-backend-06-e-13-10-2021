@@ -33,6 +33,8 @@ app.get("/herois/:id", function (req, res) {
     res.send(item);
 });
 
+// Endpoint de Create
+
 app.post("/herois", function (req, res) {
     const item = req.body;
 
