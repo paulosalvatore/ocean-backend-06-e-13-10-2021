@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+
 // Endpoints de 'Hello'
 
 app.get("/", function (req, res) {
@@ -29,6 +31,14 @@ app.get("/herois/:id", function (req, res) {
     const item = lista[id];
 
     res.send(item);
+});
+
+app.post("/herois", function (req, res) {
+    const item = req.body;
+
+    lista.push(item.nome);
+
+    res.send(item.nome + " adicionado(a) com sucesso.");
 });
 
 app.listen(3000);
