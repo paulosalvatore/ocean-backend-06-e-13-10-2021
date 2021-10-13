@@ -43,4 +43,26 @@ app.post("/herois", function (req, res) {
     res.send(item.nome + " adicionado(a) com sucesso.");
 });
 
+// Endpoint de Update
+
+app.put("/herois/:id", function (req, res) {
+    const id = +req.params.id - 1;
+
+    const item = req.body;
+
+    lista[id] = item.nome;
+
+    res.send(item.nome + " atualizado(a) com sucesso.");
+});
+
+// Endpoint de Delete
+
+app.delete("/herois/:id", function (req, res) {
+    const id = +req.params.id - 1;
+
+    delete lista[id];
+
+    res.send("Item removido com sucesso.");
+});
+
 app.listen(3000);
