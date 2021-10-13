@@ -25,7 +25,7 @@ const lista = [
         nome: "Capitã Marvel",
     },
     {
-        id: 10,
+        id: 3,
         nome: "Homem de Ferro",
     },
 ];
@@ -66,9 +66,11 @@ app.post("/herois", function (req, res) {
         return;
     }
 
-    lista.push(item.nome);
+    item.id = lista.length + 1;
 
-    res.send(item.nome + " adicionado(a) com sucesso.");
+    lista.push(item);
+
+    res.status(201).send(item);
 });
 
 // Endpoint de Update
