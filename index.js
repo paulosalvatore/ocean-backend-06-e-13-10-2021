@@ -30,6 +30,14 @@ const lista = [
     },
 ];
 
+// Função de findById
+
+function findById(id) {
+    const item = lista.find(item => item.id === id);
+
+    return item;
+}
+
 // Endpoint de Read All
 
 app.get("/herois", function (req, res) {
@@ -41,7 +49,7 @@ app.get("/herois", function (req, res) {
 app.get("/herois/:id", function (req, res) {
     const id = +req.params.id;
 
-    const item = lista.find(item => item.id === id);
+    const item = findById(id);
 
     if (!item) {
         res.status(404).send("Item não encontrado.");
@@ -76,9 +84,11 @@ app.post("/herois", function (req, res) {
 // Endpoint de Update
 
 app.put("/herois/:id", function (req, res) {
-    const id = +req.params.id - 1;
+    const id = +req.params.id;
 
-    if (!lista[id]) {
+    const itemAtual = findById(id);
+
+    if (!itemAtual) {
         res.status(404).send("Item não encontrado.");
 
         // Return encerra a função
@@ -95,9 +105,13 @@ app.put("/herois/:id", function (req, res) {
         return;
     }
 
-    lista[id] = item.nome;
+    const indice = lista.indexOf(itemAtual);
 
-    res.send(item.nome + " atualizado(a) com sucesso.");
+    item.id = itemAtual.id;
+
+    lista[indice] = item;
+
+    res.send(item);
 });
 
 // Endpoint de Delete
