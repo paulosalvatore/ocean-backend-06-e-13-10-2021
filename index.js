@@ -45,6 +45,14 @@ app.get("/herois/:id", function (req, res) {
 app.post("/herois", function (req, res) {
     const item = req.body;
 
+    if (!item || !item.nome) {
+        res.status(400).send(
+            "Corpo da requisição não encontrado ou está faltando a chave 'nome'."
+        );
+
+        return;
+    }
+
     lista.push(item.nome);
 
     res.send(item.nome + " adicionado(a) com sucesso.");
