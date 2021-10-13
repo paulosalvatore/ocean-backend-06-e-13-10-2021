@@ -30,6 +30,13 @@ app.get("/herois/:id", function (req, res) {
 
     const item = lista[id];
 
+    if (!item) {
+        res.status(404).send("Item não encontrado.");
+
+        // Return encerra a função
+        return;
+    }
+
     res.send(item);
 });
 
